@@ -1,0 +1,13 @@
+<h3>
+  New events
+</h3>
+<%= form_tag "/events_json" do %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-10">
+        <%= text_area_tag 'json_body', nil, class: "form-control", rows: 20, placeholder: "Please input event json here ..." %>
+      </div>
+    </div>
+  </div>
+  <%= submit_tag "Submit", class: "btn btn-default" %>
+<% end %>
