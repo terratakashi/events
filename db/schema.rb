@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20161104080510) do
     t.string   "occasion"
     t.integer  "invited_count"
     t.datetime "date"
-    t.boolean  "cancelled"
+    t.boolean  "cancelled",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -4,7 +4,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :occasion
       t.integer :invited_count
       t.datetime :date
-      t.boolean :cancelled
+      t.boolean :cancelled, default: false
 
       t.timestamps
     end
