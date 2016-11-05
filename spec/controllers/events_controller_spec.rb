@@ -10,26 +10,45 @@ describe EventsController do
 
 
   describe "POST #create_events" do
-    it "create multiple events" do
-      json = { events: [{occasion: "Birthday party", invited_count: 120, year: 2016, month: 2, day: 14 },
-                        {occasion: "Chirstmas party", invited_count: 120, year: 2016, month: 12, day: 25 }]}.to_json
+    context "with valid events input" do
+      before do
+        json = { events: [{occasion: "Birthday party", invited_count: 120, year: 2016, month: 2, day: 14 },
+                          {occasion: "Chirstmas party", invited_count: 120, year: 2016, month: 12, day: 25 }]}.to_json
+        post :create_events, json_body: json
+      end
 
-      post :create_events, json_body: json
-      expect(Event.count).to eq(2)
+      it "create multiple events" do
+        expect(Event.count).to eq(2)
+      end
+
+      it "redirect to events index page" do
+        expect(response).to redirect_to events_path
+      end
+
+      it "sets the flash success message" do
+        expect(flash[:success]).not_to be_blank
+      end
     end
 
-    it "redirect to events index page" do
-      json = { events: [{occasion: "Birthday party", invited_count: 120, year: 2016, month: 2, day: 14 }]}.to_json
+    context "with invalid events input" do
+      before do
+        json = { events: [{occasion: nil, invited_count: nil, year: 2016, month: 2, day: 14 },
+                          {occasion: "Chirstmas party", invited_count: 120, year: 2016, month: 12, day: 25 }]}.to_json
 
-      post :create_events, json_body: json
-      expect(response).to redirect_to events_path
-    end
+        post :create_events, json_body: json
+      end
 
-    it "sets the notice" do
-      json = { events: [{occasion: "Birthday party", invited_count: 120, year: 2016, month: 2, day: 14 }]}.to_json
+      it "no event has been created" do
+        expect(Event.count).to eq(0)
+      end
 
-      post :create_events, json_body: json
-      expect(flash[:notice]).not_to be_blank
+      it "redirect to event new page" do
+        expect(response).to redirect_to new_event_path
+      end
+
+      it "sets the flash error message" do
+        expect(flash[:error]).not_to be_blank
+      end
     end
   end
 
