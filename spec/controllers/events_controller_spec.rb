@@ -10,6 +10,20 @@ describe EventsController do
 
 
   describe "POST #create_events" do
+    context "with invalid json input" do
+      before do
+        post :create_events, json_body: "this is not a json"
+      end
+
+      it "redirect to event new page" do
+        expect(response).to redirect_to new_event_path
+      end
+
+      it "sets the flash error message" do
+        expect(flash[:error]).not_to be_blank
+      end
+    end
+
     context "with valid events input" do
       before do
         json = { events: [{occasion: "Birthday party", invited_count: 120, year: 2016, month: 2, day: 14 },
