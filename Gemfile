@@ -39,11 +39,17 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :test do
+  gem 'shoulda-matchers'
+  # nyan cat style for rspec
+  gem "nyan-cat-formatter"
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry'
-
+  gem 'rspec-rails', '~> 3.5'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
