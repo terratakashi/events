@@ -12,7 +12,7 @@ class EventsController < ApplicationController
         add_event(event)
       end
     end
-
+    flash[:notice] = "Success!"
     redirect_to events_path
   end
 
