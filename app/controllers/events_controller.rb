@@ -17,7 +17,7 @@ class EventsController < ApplicationController
   end
 
   def recent
-    @events = Event.last 20
+    @events = Event.where("date > ? AND date < ?", Date.today.last_year.beginning_of_year, Date.today.next_year.end_of_year)
   end
 
   private
