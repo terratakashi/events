@@ -1,10 +1,8 @@
 class EventsController < ApplicationController
   def index
-
   end
 
   def new
-
   end
 
   def create_events
@@ -16,6 +14,10 @@ class EventsController < ApplicationController
     end
 
     redirect_to events_path
+  end
+
+  def recent
+    @events = Event.last 20
   end
 
   private

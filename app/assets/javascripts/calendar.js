@@ -5,6 +5,6 @@ $( document ).ready(function() {
         center: 'title',
         right: 'month,listYear'
     },
-    events: '/events.json'
+    events: '/events/recent.json'
   });
 });
