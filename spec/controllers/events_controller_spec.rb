@@ -10,7 +10,7 @@ describe EventsController do
 
 
   describe "POST #create_events" do
-    context "with invalid json input" do
+    context "with invalid json input input" do
       before do
         post :create_events, json_body: "this is not a json"
       end
