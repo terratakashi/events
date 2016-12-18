@@ -8,6 +8,8 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+gem 'newrelic_rpm'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
